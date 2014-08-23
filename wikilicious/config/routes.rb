@@ -1,10 +1,8 @@
 Wikilicious::Application.routes.draw do
-  get "wikis/index"
-  get "wikis/show"
-  get "wikis/edit"
-  get "wikis/new"
-  get "wikis/create"
   devise_for :users
+
+  resources :wikis
+  root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

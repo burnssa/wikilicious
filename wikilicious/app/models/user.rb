@@ -6,4 +6,14 @@ class User < ActiveRecord::Base
 
   has_many :wikis
   has_many :collaborators, through: :wikis
+
+
+  def wikis
+  	Wiki.where(user_id: id)
+  end
+
+  def collaborators
+  	Collaborator.where(id: wikis.pluck(:collaborator_id))
+  end
+
 end

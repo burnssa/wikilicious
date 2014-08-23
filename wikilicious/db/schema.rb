@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823205724) do
+ActiveRecord::Schema.define(version: 20140823211216) do
+
+  create_table "collaborators", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "wiki_access"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "collaborators", ["user_id"], name: "index_collaborators_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -26,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140823205724) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "premium"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

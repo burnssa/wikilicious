@@ -1,2 +1,5 @@
-%h1 Wikis#show
-%p Find me in app/views/wikis/show.html.haml
+%h1 Your wiki
+%p 
+	= markdown @wiki.body
+
+%p #{link_to "Edit", edit_wiki_path} | #{link_to "Return to Wikis", wikis_path}

@@ -1,2 +1,10 @@
-%h1 Wikis#new
-%p Find me in app/views/wikis/new.html.haml
+%h1 Create a Wiki
+.row
+  .col-md-4
+    %p Suggestions for wiki
+    %ul
+      %li Be concrete in your descriptions
+      %li Write in iambic pentameter
+      %li Include pictures
+  .col-md-8
+    = render partial: 'form', locals: { user: @user, wiki: @wiki }

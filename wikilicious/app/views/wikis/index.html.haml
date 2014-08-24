@@ -1,2 +1,16 @@
-%h1 Wikis#index
-%p Find me in app/views/wikis/index.html.haml
+%div
+	%p
+		My wikis
+
+%table.table.table-striped
+	%tbody
+		- @wikis.each do |wiki|
+			%tr
+				%td= wiki.description
+				%td= link_to "view", wiki_path(wiki)
+				%td= link_to "edit", edit_wiki_path(wiki)
+				%td= button_to "delete", wiki_path(wiki), method: :delete
+
+%h3 Create a new wiki
+%div
+	=button_to "Create", new_wiki_path, method: :get

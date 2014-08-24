@@ -11,9 +11,16 @@
     .container
       .pull-right.user-info
         - if current_user
-          Hello #{current_user.email}! #{link_to "Sign out", destroy_user_session_path, method: :delete}
+          | #{link_to "Profile", '#'}
+          | #{link_to "Sign out", destroy_user_session_path, method: :delete}
+
         - else
           = link_to "Sign In", new_user_session_path
           or
           = link_to "Sign Up", new_user_registration_path
+      .pull-right.user-info
+        - if current_user.premium != true
+          = link_to "Upgrade Plan  ", new_charge_path
+        - else
+          You're on the premium plan 
       = yield

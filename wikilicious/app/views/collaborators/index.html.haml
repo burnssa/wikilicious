@@ -1,0 +1,14 @@
+%h1= "Collaborators for #{@wiki.description}"
+
+%table.table.table-striped
+	- @users.each do |user|
+		%tr
+			%td= user.name
+			%td= user.email
+			- if @wiki.users.include?(user)
+				- collaborator = @wiki.collaborator_for(user)
+				= link_to "Remove as collaborator", [@wiki, collaborator], method: :delete, class: "btn btn-danger"
+			- else
+				= link_to "Add as collaborator", wiki_collaborators_path(@wiki, user_id: user.id), method: :post, class: "btn btn-success"
+
+	

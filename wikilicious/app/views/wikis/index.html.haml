@@ -9,6 +9,7 @@
 				%td= wiki.description
 				%td= link_to "view", wiki_path(wiki)
 				%td= link_to "edit", edit_wiki_path(wiki)
+				%td= link_to "share", wiki_collaborators_path(wiki)
 				%td= button_to "delete", wiki_path(wiki), method: :delete
 
 %h3 Create a new wiki

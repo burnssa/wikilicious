@@ -11,16 +11,15 @@
     .container
       .pull-right.user-info
         - if current_user
-          | #{link_to "Profile", '#'}
-          | #{link_to "Sign out", destroy_user_session_path, method: :delete}
-
+          #{link_to "Profile", '#'}
+          | #{link_to "Sign out |", destroy_user_session_path, method: :delete}
+          - if current_user.premium?
+            You're on the premium plan 
+          - else 
+            = link_to "Upgrade Plan  ", new_charge_path
         - else
-          = link_to "Sign In", new_user_session_path
+          = link_to " Sign In", new_user_session_path
           or
-          = link_to "Sign Up", new_user_registration_path
-      .pull-right.user-info
-        - if current_user && !current_user.premium?
-          = link_to "Upgrade Plan  ", new_charge_path
-        - else
-          You're on the premium plan 
+          = link_to "| Sign Up", new_user_registration_path
       = yield
+   

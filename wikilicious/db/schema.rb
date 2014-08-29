@@ -11,16 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827044451) do
+ActiveRecord::Schema.define(version: 20140829025108) do
 
   create_table "collaborators", force: true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "wiki_id"
-    t.boolean  "wiki_access"
-    t.string   "email"
-    t.string   "name"
   end
 
   add_index "collaborators", ["user_id"], name: "index_collaborators_on_user_id"

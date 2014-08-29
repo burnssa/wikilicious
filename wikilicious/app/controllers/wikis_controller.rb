@@ -1,6 +1,7 @@
 class WikisController < ApplicationController
   def index
     @wikis = current_user.wikis
+    @collaboration_wikis = current_user.collaborators.collect(&:wiki)
   end
 
   def new
@@ -19,11 +20,13 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = current_user.wikis.friendly.find(params[:id])
+    wiki = Wiki.friendly.find(params[:id])
+    @wiki = wiki if current_user.can_collaborate_on?(wiki)
   end
 
   def update
-    @wiki = current_user.wikis.friendly.find(params[:id])
+    wiki = Wiki.friendly.find(params[:id])
+    @wiki = wiki if current_user.can_collaborate_on?(wiki)
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "wiki was saved"
       redirect_to @wiki
@@ -34,7 +37,8 @@ class WikisController < ApplicationController
   end
 
   def show
-    @wiki = current_user.wikis.friendly.find(params[:id])
+    wiki = Wiki.friendly.find(params[:id])
+    @wiki = wiki if current_user.can_collaborate_on?(wiki)
   end 
 
   def destroy

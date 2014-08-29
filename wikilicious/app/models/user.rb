@@ -7,13 +7,17 @@ class User < ActiveRecord::Base
   has_many :wikis
   has_many :collaborators
 
-
-  def wikis
-  	Wiki.where(user_id: id)
+  def collaborated_wikis
+    collaborators.collect(&:wiki)
   end
 
-  def collaborators
-  	Collaborator.where(id: wikis.pluck(:collaborator_id))
+  def can_collaborate_on?(wiki)
+    wikis.include?(wiki) || collaborated_wikis.include?(wiki)
   end
 
+  def showing_collaborator
+    wiki = Wiki.friendly.find(params[:id])
+    @wiki = wiki if current_user.can_collaborate_on?(wiki)
+    @wiki
+  end
 end

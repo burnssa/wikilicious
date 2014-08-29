@@ -11,7 +11,7 @@
     .container
       .pull-right.user-info
         - if current_user
-          #{link_to "Profile", '#'}
+          Hi #{current_user.name ||= "there"} | #{link_to "Profile", edit_user_registration_path}
           | #{link_to "Sign out |", destroy_user_session_path, method: :delete}
           - if current_user.premium?
             You're on the premium plan 
@@ -20,6 +20,6 @@
         - else
           = link_to " Sign In", new_user_session_path
           or
-          = link_to "| Sign Up", new_user_registration_path
+          = link_to " Sign Up", new_user_registration_path
       = yield
    

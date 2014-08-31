@@ -1,5 +1,8 @@
 class Wiki < ActiveRecord::Base
   extend FriendlyId
+
+  # attr_accessor :public_wiki
+
   friendly_id :description, use: :slugged
 
   belongs_to :user

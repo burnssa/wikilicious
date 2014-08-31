@@ -10,11 +10,19 @@
 				%td= link_to "view", wiki_path(wiki)
 				%td= link_to "edit", edit_wiki_path(wiki)
 				%td= link_to "share", wiki_collaborators_path(wiki)
+				%td
+					- if current_user.premium?
+						- "Your post is #{wiki.public_wiki ? 'Public' : 'Private'}"
+					- else 
+						= link_to "Upgrade for private posts", new_charge_path, class: "btn btn-success"
 				%td= button_to "delete", wiki_path(wiki), method: :delete
 
 %h3 Create a new wiki
 %div
-	=button_to "Create", new_wiki_path, method: :get
+	- if current_user.premium?
+		=button_to "Create Premium Wiki", new_wiki_path, method: :get
+	- else
+		=button_to "Create", new_wiki_path, method: :get
 
 %table.table.table-striped
 	%tbody

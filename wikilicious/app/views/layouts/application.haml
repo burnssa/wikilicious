@@ -5,18 +5,18 @@
   %body
     %p.notice= notice
     %p.alert= alert
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     .container
       .pull-right.user-info
         - if current_user
           Hi #{current_user.name ||= "there"} | #{link_to "Profile", edit_user_registration_path}
-          | #{link_to "Sign out |", destroy_user_session_path, method: :delete}
+          | #{link_to "Sign out", destroy_user_session_path, method: :delete} |
           - if current_user.premium?
-            You're on the premium plan 
+            You're a premium user 
           - else 
-            = link_to "Upgrade Plan  ", new_charge_path
+            = link_to "Upgrade Plan", new_charge_path
         - else
           = link_to " Sign In", new_user_session_path
           or

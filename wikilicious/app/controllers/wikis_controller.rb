@@ -1,7 +1,8 @@
 class WikisController < ApplicationController
   def index
-    @wikis = current_user.wikis
+    @wikis = current_user.wikis  
     @collaboration_wikis = current_user.collaborators.collect(&:wiki)
+    #@public_wikis = Wiki.where(public_wiki: true)
   end
 
   def new
@@ -11,6 +12,7 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
+
     if @wiki.save
       flash[:notice] = "Your wiki has been created."
     else
@@ -22,11 +24,18 @@ class WikisController < ApplicationController
   def edit
     wiki = Wiki.friendly.find(params[:id])
     @wiki = wiki if current_user.can_collaborate_on?(wiki)
+    if @wiki.update_attributes(wiki_params)
+      redirect_to @wiki
+    else
+      flash[:error] = "There was an error saving the wiki. Please try again"
+      render :edit
+    end
   end
 
   def update
     wiki = Wiki.friendly.find(params[:id])
     @wiki = wiki if current_user.can_collaborate_on?(wiki)
+
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "wiki was saved"
       redirect_to @wiki

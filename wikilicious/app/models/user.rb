@@ -14,10 +14,4 @@ class User < ActiveRecord::Base
   def can_collaborate_on?(wiki)
     wikis.include?(wiki) || collaborated_wikis.include?(wiki)
   end
-
-  def showing_collaborator
-    wiki = Wiki.friendly.find(params[:id])
-    @wiki = wiki if current_user.can_collaborate_on?(wiki)
-    @wiki
-  end
 end

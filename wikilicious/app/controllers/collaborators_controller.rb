@@ -10,9 +10,9 @@ class CollaboratorsController < ApplicationController
   	#@collaborator = Collaborator.new(wiki_id: params[:wiki_id], user_id: params[:user_id])
 
   	if @collaborator.save
-      flash[:notice] = "#{@collaborator.name} was added as a collaborator."
+      flash[:notice] = "#{@collaborator.user.name} was added as a collaborator."
     else
-      flash[:error] = "There was a error adding #{@collaborator.name} as a collaborator. Please try again."
+      flash[:error] = "There was a error adding #{@collaborator.user.name} as a collaborator. Please try again."
   	end
 
   	redirect_to wiki_collaborators_path(@wiki)
@@ -21,9 +21,9 @@ class CollaboratorsController < ApplicationController
   def destroy
   	@collaborator = Collaborator.find(params[:id])
   	if @collaborator.destroy
-      flash[:notice] = "You've successfully removed #{@collaborator.name} as a collaborator"
+      flash[:notice] = "You've successfully removed #{@collaborator.user.name} as a collaborator"
     else
-      flash[:error] = "There was a error removing #{@collaborator.name} as a collaborator. Please try again."
+      flash[:error] = "There was a error removing #{@collaborator.user.name} as a collaborator. Please try again."
     end
     redirect_to wiki_collaborators_path
   end

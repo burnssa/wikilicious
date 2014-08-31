@@ -10,4 +10,4 @@
 		- if current_user.can_collaborate_on?(@wiki)
 			= render partial: 'form', locals: { user: @user, wiki: @wiki }
 		- else
-			Sorry you're not authorized to edit this wiki
+			Sorry - you're not authorized to edit this wiki

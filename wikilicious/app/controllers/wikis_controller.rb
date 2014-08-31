@@ -41,7 +41,7 @@ class WikisController < ApplicationController
 
   def show
     wiki = Wiki.friendly.find(params[:id])
-    @wiki = wiki if current_user.can_collaborate_on?(wiki)
+    @wiki = wiki if ( current_user.can_collaborate_on?(wiki) || current_user.can_view?(wiki) )
   end 
 
   def destroy

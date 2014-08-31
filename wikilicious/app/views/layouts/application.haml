@@ -11,11 +11,11 @@
     .container
       .pull-right.user-info
         - if current_user
-          Hi #{current_user.name ||= "there"} | #{link_to "Profile", edit_user_registration_path}
-          | #{link_to "Sign out", destroy_user_session_path, method: :delete} |
+          Hi #{current_user.name ||= "there"} | #{link_to "Profile", edit_user_registration_path} | #{link_to "Sign out", destroy_user_session_path, method: :delete}
           - if current_user.premium?
             You're a premium user 
           - else 
+            |
             = link_to "Upgrade Plan", new_charge_path
         - else
           = link_to " Sign In", new_user_session_path

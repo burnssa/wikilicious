@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   def can_collaborate_on?(wiki)
     wikis.include?(wiki) || collaborated_wikis.include?(wiki)
   end
+
+  def can_view?(wiki)
+    wiki.public_wiki == true
+  end
 end

@@ -21,14 +21,25 @@
 %div 
 	=button_to "Create", new_wiki_path, method: :get
 
+%br
+%div
+	%strong	
+		Wikis you are collaborating on
+
 %table.table.table-striped
 	%tbody
+		%tr
+			%th Description 
+			%th View
+			%th Edit
+			%th Owner
 		- @collaboration_wikis.each do |w|
 			%tr
 				%td= w.description
 				%td= link_to "view", wiki_path(w)
 				%td= link_to "edit", edit_wiki_path(w)
-				%td= "Owner: #{w.user.name}"
+				%td= w.user.name
+%br
 %div
 	%strong	
 		All public wikis

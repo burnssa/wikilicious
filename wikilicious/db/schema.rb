@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140831191839) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
-    t.boolean  "public_wiki"
+    t.boolean  "public_wiki", default: true
   end
 
   add_index "wikis", ["user_id"], name: "index_wikis_on_user_id"

@@ -18,24 +18,29 @@
 				%td= button_to "delete", wiki_path(wiki), method: :delete
 
 %h3 Create a new wiki
+%div 
+	=button_to "Create", new_wiki_path, method: :get
+
+%table.table.table-striped
+	%tbody
+		- @collaboration_wikis.each do |w|
+			%tr
+				%td= w.description
+				%td= link_to "view", wiki_path(w)
+				%td= link_to "edit", edit_wiki_path(w)
+				%td= "Owner: #{w.user.name}"
 %div
-	- if current_user.premium?
-		=button_to "Create Premium Wiki", new_wiki_path, method: :get
-	- else
-		=button_to "Create", new_wiki_path, method: :get
+	%strong	
+		All public wikis
 
 %table.table.table-striped
 	%tbody
-		- @collaboration_wikis.each do |wiki|
+		%tr
+			%th Description 
+			%th Owner 
+			%th View
+		- @public_wikis.each do |wi|
 			%tr
-				%td= wiki.description
-				%td= link_to "view", wiki_path(wiki)
-				%td= link_to "edit", edit_wiki_path(wiki)
-				%td= "Owner: #{wiki.user.name}"
-
-%table.table.table-striped
-	%tbody
-		- @public_wikis.each do |wiki|
-			%tr
-				%td= wiki.description
-				%td= link_to "view", wiki_path(wiki)
+				%td= wi.description
+				%td= wi.user.name
+				%td= link_to "view", wiki_path(wi)

@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   def index
     @wikis = current_user.wikis  
     @collaboration_wikis = current_user.collaborators.collect(&:wiki)
-    @public_wikis = Wiki.where(public_wiki: true)
+    @public_wikis = Wiki.where(public_wiki: 'true')
   end
 
   def new
@@ -59,6 +59,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:description, :body)
+    params.require(:wiki).permit(:description, :body, :public_wiki)
   end
 end

@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   def index
     @wikis = current_user.wikis  
     @collaboration_wikis = current_user.collaborators.collect(&:wiki)
-    #@public_wikis = Wiki.where(public_wiki: true)
+    @public_wikis = Wiki.where(public_wiki: true)
   end
 
   def new
@@ -31,7 +31,7 @@ class WikisController < ApplicationController
     @wiki = wiki if current_user.can_collaborate_on?(wiki)
 
     if @wiki.update_attributes(wiki_params)
-      flash[:notice] = "wiki was saved"
+      flash[:notice] = "Wiki was saved"
       redirect_to @wiki
     else
       flash[:error] = "There was an error saving the wiki. Please try again"

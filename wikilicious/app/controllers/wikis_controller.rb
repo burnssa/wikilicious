@@ -24,12 +24,6 @@ class WikisController < ApplicationController
   def edit
     wiki = Wiki.friendly.find(params[:id])
     @wiki = wiki if current_user.can_collaborate_on?(wiki)
-    if @wiki.update_attributes(wiki_params)
-      redirect_to @wiki
-    else
-      flash[:error] = "There was an error saving the wiki. Please try again"
-      render :edit
-    end
   end
 
   def update
